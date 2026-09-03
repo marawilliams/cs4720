@@ -55,7 +55,7 @@ fun Greeting() {
     TextField( value = name, onValueChange = { name = it}, label = {Text("Name")})
     Row() {
         listOf("Hello", "Bonjour", "Ciao", "Ya Sou").forEach { word ->
-            Button(onClick = { salutation = word }) { Text("$word") }
+            Button(onClick = { salutation = word }) { Text(word) }
         }
     }
 }
