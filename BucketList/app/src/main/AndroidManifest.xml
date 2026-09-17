@@ -10,12 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Helloworldear6xt">
+        android:theme="@style/Theme.BucketList">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Helloworldear6xt"
+            android:theme="@style/Theme.BucketList"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,24 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ListActivity"
-            android:exported="false"
-            android:label="@string/title_activity_list"
-            android:theme="@style/Theme.Helloworldear6xt"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".CreateActivity"
-            android:exported="false"
-            android:label="@string/title_activity_create"
-            android:theme="@style/Theme.Helloworldear6xt"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".DetailActivity"
-            android:exported="false"
-            android:label="@string/title_activity_detail"
-            android:theme="@style/Theme.Helloworldear6xt"
-            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
