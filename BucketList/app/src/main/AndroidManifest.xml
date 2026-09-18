@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BucketList">
         <activity
-            android:name=".ListActivity"
+            android:name="edu.virginia.cs4720.ear6xt.ListActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.BucketList"

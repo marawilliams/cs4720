@@ -6,12 +6,14 @@ import android.widget.CheckBox
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import java.time.LocalDate
@@ -22,26 +24,29 @@ import kotlin.jvm.java
 //goes inside listscreen(vm)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun listscreen (vm: ListViewModel = ListViewModel()) {
+fun ListScreen (modifier: Modifier, vm: ListViewModel = ListViewModel()) {
 
     val sorted = vm.items().sortedWith(
         compareBy({ it.done }, { it.dueDate })
     )
     val context = LocalContext.current
+    Column (modifier = modifier.fillMaxSize()) {
 
-    LazyColumn {
-        items(sorted) { item ->
-            BucketRow(
-                name = item.name,
-                dueDate = item.dueDate,
-                done = item.done,
-                onToggle = { vm.toggle(item.id) },
-                onEdit = {
-                    val i = Intent(context, DetailActivity::class.java)
-                    i.putExtra("ITEM_ID", item.id)
-                    context.startActivity(i)
-                }
-            )
+        Text("To Do Items:")
+        LazyColumn {
+            items(sorted) { item ->
+                BucketRow(
+                    name = item.name,
+                    dueDate = item.dueDate,
+                    done = item.done,
+                    onToggle = { vm.toggle(item.id) },
+                    onEdit = {
+                        val i = Intent(context, DetailActivity::class.java)
+                        i.putExtra("ITEM_ID", item.id)
+                        context.startActivity(i)
+                    }
+                )
+            }
         }
     }
 }
