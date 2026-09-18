@@ -56,7 +56,8 @@ fun BucketRow(
     Column(){
         Row(){
             Checkbox(checked = done, onCheckedChange = { onToggle()})
-            Button(onClick = {onEdit()}){Row(){ Text("$name - $dueDate")}}
+            Text("$name - $dueDate")
+            Button(onClick = {onEdit()}){Text("✎")}
         }
     }
     TODO("Not yet implemented")
