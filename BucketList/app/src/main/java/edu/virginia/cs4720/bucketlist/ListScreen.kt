@@ -15,13 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import java.time.LocalDate
+import kotlin.comparisons.compareBy
 import kotlin.jvm.java
 
 
 //goes inside listscreen(vm)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun listscreen (vm: ListViewModel) {
+fun listscreen (vm: ListViewModel = ListViewModel()) {
 
     val sorted = vm.items().sortedWith(
         compareBy({ it.done }, { it.dueDate })

@@ -1,9 +1,11 @@
 package edu.virginia.cs4720.ear6xt
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -14,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import edu.virginia.cs4720.ear6xt.ui.theme.BucketTheme
 
 class ListActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,7 +24,6 @@ class ListActivity : ComponentActivity() {
             BucketTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting2(
-                        name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -30,19 +32,22 @@ class ListActivity : ComponentActivity() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
+fun Greeting2(modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = "List of to Do Items: ",
         modifier = modifier
     )
+    listscreen()
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview2() {
     BucketTheme {
-        Greeting2("Android")
+        Greeting2()
     }
 }
