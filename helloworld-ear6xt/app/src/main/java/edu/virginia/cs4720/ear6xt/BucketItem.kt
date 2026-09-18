@@ -4,9 +4,10 @@ import android.widget.DatePicker
 import java.time.LocalDate
 
 //data class file
-class BucketItem (
+data class BucketItem (
     val name: String = "",
-    val dueDate: LocalDate? = null,
+    val dueDate: LocalDate,
     val done: Boolean = false,
-    val date: LocalDate = LocalDate.now()
+    val completedDate: LocalDate? = null,
+    val id: String
     )
