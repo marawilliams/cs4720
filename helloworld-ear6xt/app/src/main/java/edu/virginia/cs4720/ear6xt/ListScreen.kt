@@ -2,10 +2,15 @@ package edu.virginia.cs4720.ear6xt
 
 import android.content.Intent
 import android.os.Build
+import android.widget.CheckBox
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
@@ -48,8 +53,11 @@ fun BucketRow(
     onToggle: () -> Unit,
     onEdit: () -> Unit
 ) {
-    Column{
-
+    Column(){
+        Row(){
+            Checkbox(checked = done, onCheckedChange = { onToggle()})
+            Button(onClick = {onEdit()}){Row(){ Text("$name - $dueDate")}}
+        }
     }
     TODO("Not yet implemented")
 }
