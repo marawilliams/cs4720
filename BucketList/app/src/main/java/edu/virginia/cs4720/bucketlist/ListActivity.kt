@@ -13,7 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import edu.virginia.cs4720.ear6xt.ui.theme.BucketTheme
+import edu.virginia.cs4720.bucketlist.ui.theme.BucketTheme
 
 class ListActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -22,32 +22,18 @@ class ListActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BucketTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting2(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                listscreen()
             }
         }
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun Greeting2(modifier: Modifier = Modifier) {
-    Text(
-        text = "List of to Do Items: ",
-        modifier = modifier
-    )
-    listscreen()
-}
 
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview2() {
-    BucketTheme {
-        Greeting2()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    BucketTheme {
+//        Text("Hello")
+//    }
+//}
