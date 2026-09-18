@@ -11,14 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import edu.virginia.cs4720.ear6xt.ui.theme.Helloworldear6xtTheme
+import edu.virginia.cs4720.ear6xt.ui.theme.BucketTheme
 
 class CreateActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            Helloworldear6xtTheme {
+        setContent { BucketTheme {
+            CreateScreen(onDone = {finish()})
+        }}
+            /*Helloworldear6xtTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting3(
                         name = "Android",
@@ -26,10 +28,12 @@ class CreateActivity : ComponentActivity() {
                     )
                 }
             }
-        }
+        }*/
     }
 }
 
+//save button: vm.save(); onDone()
+// cancel button: onDone()
 @Composable
 fun Greeting3(name: String, modifier: Modifier = Modifier) {
     Text(

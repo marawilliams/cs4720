@@ -11,14 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import edu.virginia.cs4720.ear6xt.ui.theme.Helloworldear6xtTheme
+import edu.virginia.cs4720.ear6xt.ui.theme.BucketTheme
 
 class ListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Helloworldear6xtTheme {
+            BucketTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting2(
                         name = "Android",
@@ -38,10 +38,11 @@ fun Greeting2(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview2() {
-    Helloworldear6xtTheme {
+    BucketTheme {
         Greeting2("Android")
     }
 }
