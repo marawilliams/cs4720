@@ -23,6 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="edu.virginia.cs4720.ear6xt.CreateActivity" android:exported="false"/>
+        <activity android:name="edu.virginia.cs4720.ear6xt.DetailActivity" android:exported="false"/>
     </application>
 
 </manifest>

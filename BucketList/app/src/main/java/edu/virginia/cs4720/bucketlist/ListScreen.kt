@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import java.time.LocalDate
 import kotlin.comparisons.compareBy
 import kotlin.jvm.java
@@ -24,11 +25,13 @@ import kotlin.jvm.java
 //goes inside listscreen(vm)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ListScreen (modifier: Modifier, vm: ListViewModel = ListViewModel()) {
+fun ListScreen (modifier: Modifier, vm: ListViewModel = viewModel()) {
 
     val sorted = vm.items().sortedWith(
         compareBy({ it.done }, { it.dueDate })
     )
+    println("sorted list" + sorted)
+
     val context = LocalContext.current
     Column (modifier = modifier.fillMaxSize()) {
 
@@ -48,6 +51,13 @@ fun ListScreen (modifier: Modifier, vm: ListViewModel = ListViewModel()) {
                 )
             }
         }
+        Button(
+            onClick = {
+                context.startActivity(Intent(context, CreateActivity::class.java))
+            }
+        ){
+            Text("Add Activity")
+        }
     }
 }
 
@@ -66,7 +76,6 @@ fun BucketRow(
             Button(onClick = {onEdit()}){Text("✎")}
         }
     }
-    TODO("Not yet implemented")
 }
 
 

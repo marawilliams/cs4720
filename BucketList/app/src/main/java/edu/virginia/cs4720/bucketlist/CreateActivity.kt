@@ -1,51 +1,48 @@
-//package edu.virginia.cs4720.ear6xt
-//
-//import android.os.Bundle
-//import androidx.activity.ComponentActivity
-//import androidx.activity.compose.setContent
-//import androidx.activity.enableEdgeToEdge
-//import androidx.compose.foundation.layout.fillMaxSize
-//import androidx.compose.foundation.layout.padding
-//import androidx.compose.material3.Scaffold
-//import androidx.compose.material3.Text
-//import androidx.compose.runtime.Composable
-//import androidx.compose.ui.Modifier
-//import androidx.compose.ui.tooling.preview.Preview
-//import edu.virginia.cs4720.bucketlist.ui.theme.BucketTheme
-//
-//class CreateActivity : ComponentActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContent { BucketTheme {
-//            CreateScreen(onDone = {finish()})
-//        }}
-//            /*Helloworldear6xtTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    Greeting3(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-//                }
-//            }
-//        }*/
-//    }
-//}
-//
-////save button: vm.save(); onDone()
-//// cancel button: onDone()
-//@Composable
-//fun Greeting3(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview3() {
-//    Helloworldear6xtTheme {
-//        Greeting3("Android")
-//    }
-//}
+package edu.virginia.cs4720.ear6xt
+
+import android.os.Build
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import edu.virginia.cs4720.bucketlist.ui.theme.BucketTheme
+
+class CreateActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent { BucketTheme {
+            Scaffold { innerPadding ->
+                CreateScreen(modifier = Modifier.padding(innerPadding), onDone = { finish() })
+            }
+        }}
+    }
+}
+
+//save button: vm.save(); onDone()
+// cancel button: onDone()
+@Composable
+fun Greeting3(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview3() {
+    BucketTheme {
+        Greeting3("Android")
+    }
+}
