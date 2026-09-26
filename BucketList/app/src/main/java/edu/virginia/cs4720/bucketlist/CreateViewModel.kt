@@ -30,14 +30,6 @@ class CreateViewModel : ViewModel() {
     }
 
     fun items() = BucketRepository.items
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun toggle(id: String) {
-        val item = BucketRepository.items.first { it.id == id}
-        BucketRepository.update(
-            if (item.done) item.copy(done = false, completedDate = null)
-            else item.copy (done = true, completedDate = LocalDate.now())
-        )
-    }
 
     @OptIn(ExperimentalUuidApi::class)
     @RequiresApi(Build.VERSION_CODES.O)
