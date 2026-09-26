@@ -40,6 +40,9 @@ import androidx.compose.ui.window.Popup
 import androidx.lifecycle.viewmodel.compose.viewModel
 import java.text.SimpleDateFormat
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import edu.virginia.cs4720.bucketlist.R
 
 import java.util.Date
@@ -56,6 +59,13 @@ fun CreateScreen ( modifier: Modifier, vm: CreateViewModel = viewModel(), onDone
     )
     val context = LocalContext.current
     Column (modifier = modifier.fillMaxSize().padding(top = 50.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "creating activity:",
+            color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp,
+            textAlign = TextAlign.Center,
+            modifier= modifier.fillMaxWidth())
+
         field(vm)
         DatePickerDocked(vm)
         Spacer(modifier = Modifier.weight(1f))
