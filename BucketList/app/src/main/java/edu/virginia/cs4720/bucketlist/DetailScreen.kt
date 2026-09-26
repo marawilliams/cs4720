@@ -2,14 +2,17 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -23,9 +26,10 @@ import edu.virginia.cs4720.ear6xt.ListViewModel
 @Composable
 fun DetailScreen (id: String, modifier: Modifier, vm: DetailViewModel = viewModel(), onDone: () -> Unit){
     vm.start(id)//first line
-    Column(modifier = modifier) {
-        Row() {
-            Checkbox(checked = vm.done, onCheckedChange = { vm.toggle(id)})
+    Column(modifier = modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Row(modifier = Modifier.padding(top = 20.dp)) {
+            Checkbox(checked = vm.done, onCheckedChange = { vm.toggle(id)},
+                colors = CheckboxDefaults.colors(checkedColor = Color.White, uncheckedColor = Color.White, checkmarkColor = Color(0xFF1C3A13)))
             TextField(
                 value = vm.activity,
                 onValueChange = {
@@ -37,10 +41,12 @@ fun DetailScreen (id: String, modifier: Modifier, vm: DetailViewModel = viewMode
             )
         }
         Text(
-            text = "Due: ${vm.dueDate}"
+            text = "Due: ${vm.dueDate}",
+            color = Color.White
         )
         if (vm.done){
-            Text("Completed: ${vm.completed}")
+            Text(text = "Completed: ${vm.completed}",
+                color = Color.White)
         }
         Row() {
 

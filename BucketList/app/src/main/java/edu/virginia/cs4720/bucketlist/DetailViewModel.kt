@@ -32,7 +32,7 @@ class DetailViewModel : ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun toggle(id: String) {
         val item = BucketRepository.items.first { it.id == id}
-        if (item.done){
+        if (done == true){
             done = false
             completed = null
         }
