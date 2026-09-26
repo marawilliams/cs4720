@@ -127,7 +127,7 @@ fun BucketRow(
     Column(){
         Row(verticalAlignment = Alignment.CenterVertically){
             Checkbox( checked = done, onCheckedChange = { onToggle()}, colors = CheckboxDefaults.colors(checkedColor = Color.White, uncheckedColor = Color.White, checkmarkColor = Color(0xFF1C3A13)))
-            Text(text = "$name - $dueDate", color = Color.White, modifier = Modifier.padding(10.dp))
+            Text(text = "$name - $dueDate", color = Color.White, modifier = Modifier.padding(10.dp).width(175.dp))
             Spacer(modifier = Modifier.weight(1f))
             IconButton(onClick = {onEdit()}){Text(color = Color.White, text ="✎", fontSize =  25.sp )}
         }

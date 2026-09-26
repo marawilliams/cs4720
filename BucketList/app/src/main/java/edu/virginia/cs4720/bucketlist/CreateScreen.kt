@@ -145,7 +145,7 @@ fun convertMillisToDate(millis: Long): String {
 
 @Composable
 fun field(vm: CreateViewModel) {
-    TextField( value = vm.activity, onValueChange = { vm.updateActivity(it)
+    TextField( modifier = Modifier.fillMaxWidth(0.8f), value = vm.activity, onValueChange = { vm.updateActivity(it)
                                                       vm.canSave()}, label = {Text("Activity:")})
 }
 
