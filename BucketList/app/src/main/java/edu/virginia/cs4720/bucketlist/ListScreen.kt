@@ -7,15 +7,22 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -52,9 +59,9 @@ fun ListScreen (modifier: Modifier, vm: ListViewModel = viewModel()) {
             textAlign = TextAlign.Center,
             modifier= modifier.fillMaxWidth())
 
-        Box(Modifier.align(Alignment.CenterHorizontally).background(Color(0x8884732B)).fillMaxWidth(0.8f)){
+        Box(Modifier.align(Alignment.CenterHorizontally).background(Color(0x5084732B)).fillMaxWidth(0.8f).padding(15.dp).heightIn(min = 50.dp)){
             if (sorted.size == 0){
-                Text(modifier = modifier.padding(10.dp).widthIn(min = 3.dp).align(Alignment.TopStart), text = "no activities added... ", color = Color.White)
+                Text(text = "no activities added... ", color = Color.White)
             }
 
             var row = 0
@@ -96,14 +103,15 @@ fun ListScreen (modifier: Modifier, vm: ListViewModel = viewModel()) {
                 }
             }
         }
+        Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            modifier = Modifier.fillMaxWidth(0.8f).padding(12.dp),
+            modifier = Modifier.fillMaxWidth(0.8f).padding(vertical = 10.dp), shape = RoundedCornerShape(2.dp),
             onClick = {
                 context.startActivity(Intent(context, CreateActivity::class.java))
             }
         ){
-            Text("Add Activity")
+            Text(text = "Add Activity", fontSize = 20.sp)
         }
     }
 }
@@ -117,11 +125,13 @@ fun BucketRow(
     onEdit: () -> Unit
 ) {
     Column(){
-        Row(){
-            Checkbox(checked = done, onCheckedChange = { onToggle()})
-            Text("$name - $dueDate")
-            Button(onClick = {onEdit()}){Text("✎")}
+        Row(verticalAlignment = Alignment.CenterVertically){
+            Checkbox( checked = done, onCheckedChange = { onToggle()}, colors = CheckboxDefaults.colors(checkedColor = Color.White, uncheckedColor = Color.White, checkmarkColor = Color(0xFF1C3A13)))
+            Text(text = "$name - $dueDate", color = Color.White, modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.weight(1f))
+            IconButton(onClick = {onEdit()}){Text(color = Color.White, text ="✎", fontSize =  25.sp )}
         }
+
     }
 }
 
