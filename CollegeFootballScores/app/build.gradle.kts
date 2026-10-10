@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.room3.common.jvm)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
