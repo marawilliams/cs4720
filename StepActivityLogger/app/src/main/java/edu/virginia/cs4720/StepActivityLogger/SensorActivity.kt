@@ -21,7 +21,7 @@ class SensorActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SensoreScreenTheme {
-                Scaffold { innerPadding -> SensorScreen(modifier = Modifier.padding(innerPadding))
+                Scaffold { innerPadding -> HistoryScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

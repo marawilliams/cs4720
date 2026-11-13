@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,7 +38,7 @@ fun SensorScreen(modifier: Modifier = Modifier, vm: SensorViewModel = viewModel(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 24.dp, start = 16.dp, end = 16.dp)
+        contentPadding = PaddingValues(bottom = 24.dp, start = 16.dp, end = 16.dp)
     ) {
         item {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -58,7 +59,7 @@ fun SensorScreen(modifier: Modifier = Modifier, vm: SensorViewModel = viewModel(
 
         when {
             state.isLoading -> item {
-                androidx.compose.foundation.layout.Box(
+                Box(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
@@ -83,7 +84,7 @@ fun SensorScreen(modifier: Modifier = Modifier, vm: SensorViewModel = viewModel(
                 )
             }
             else -> {
-                items(logs, key = { it.date }) { log -> LogCard(log) }
+                items(logs, key = { it.date }) { log -> LogsCard(log) }
             }
         }
     }
@@ -91,7 +92,7 @@ fun SensorScreen(modifier: Modifier = Modifier, vm: SensorViewModel = viewModel(
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun LogCard(log: Log) {
+fun LogsCard(log: Log) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Row(Modifier.padding(16.dp)){
             Text(
