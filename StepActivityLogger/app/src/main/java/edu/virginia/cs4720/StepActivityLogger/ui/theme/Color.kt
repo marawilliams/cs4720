@@ -1,4 +1,4 @@
-package edu.virginia.cs4720.collegefootballscores.ui.theme
+package edu.virginia.cs4720.StepActivityLogger.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

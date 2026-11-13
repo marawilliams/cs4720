@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "edu.virginia.cs4720.collegefootballscores"
+    namespace = "edu.virginia.cs4720.StepActivityLogger"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "edu.virginia.cs4720.collegefootballscores"
+        applicationId = "edu.virginia.cs4720.StepActivityLogger"
         minSdk = 24
         targetSdk = 37
         versionCode = 1

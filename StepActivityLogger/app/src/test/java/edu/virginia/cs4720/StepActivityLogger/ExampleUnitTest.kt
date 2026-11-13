@@ -1,4 +1,4 @@
-package edu.virginia.cs4720.collegefootballscores
+package edu.virginia.cs4720.StepActivityLogger
 
 import org.junit.Test
 
