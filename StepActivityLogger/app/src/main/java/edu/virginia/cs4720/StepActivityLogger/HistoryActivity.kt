@@ -5,15 +5,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import edu.virginia.cs4720.StepActivityLogger.ui.theme.SensoreScreenTheme
 
 class HistoryActivity : ComponentActivity() {
-    private val viewModel: SensorViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,13 @@ class HistoryActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SensoreScreenTheme {
-                Scaffold { innerPadding -> HistoryScreen(modifier = Modifier.padding(innerPadding))
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Scaffold { innerPadding ->
+                        HistoryScreen(modifier = Modifier.padding(innerPadding))
+                    }
                 }
             }
         }

@@ -5,77 +5,50 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.util.copy
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import kotlin.coroutines.cancellation.CancellationException
 
 @RequiresApi(Build.VERSION_CODES.O)
-data class LogUiState (
-    val date: LocalDate = LocalDate.now(),
-    val stepCount: Int = 0,
-    val isLoading: Boolean = false,
-    val error: String? = null
-)
-
-@RequiresApi(Build.VERSION_CODES.O)
 class SensorViewModel(app : Application) : AndroidViewModel(app) {
 
     private val repo = LogRepository(LogDatabase.get(app).logDAO())
-    private val _uiState = MutableStateFlow(LogUiState())
-    val uiState: StateFlow<LogUiState> = _uiState.asStateFlow()
+    private val tracker = StepCounter(app)
+    private val savedToday = MutableStateFlow(0)
 
-    private val _logs = MutableStateFlow<List<Log>>(emptyList())
-    val logs: StateFlow<List<Log>> = _logs.asStateFlow()
+    val uiState: StateFlow<SensorUiState> =
+        combine(
+            tracker.state,
+            savedToday
+        ) { s, saved -> s.copy(steps = saved + s.sessionSteps) }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, SensorUiState())
 
-    private var loadJob: Job? = null
-    private var observeJob: Job? = null
 
     init {
-        observeLogs()
-        loadLogs() }
-
-    private fun observeLogs(){
-        observeJob?.cancel()
-        val s = _uiState.value
-        observeJob = viewModelScope.launch {
-            repo.logs(s.date, s.stepCount).collect { list ->
-                _logs.value = list
-            }
+        viewModelScope.launch {
+            savedToday.value = repo.todaySteps(LocalDate.now())
+            tracker.state.map { it.sessionSteps }.distinctUntilChanged()
+                .collect { sessionSteps ->
+                    repo.saveSteps(LocalDate.now(), savedToday.value + sessionSteps)
+                }
         }
     }
 
-    fun loadLogs() {
-        loadJob?.cancel()
-        val s = _uiState.value
-        loadJob = viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, error = null)}
-            try {
-                repo.refresh(s.date,s.stepCount)
-                _uiState.update { it.copy(isLoading = false)}
-            } catch (e: CancellationException){
-                throw e
-            } catch (e: java.io.IOException) {
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        error = "Oh no! There's no internet connection. Please check your connection and try again.",
-                    )
-                }
-            } catch (e: Exception) {
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        error = "Unable to load games. Please try again."
-                    )
-                }
-            }
-        }
+    fun startSensors(stepsAllowed: Boolean) = tracker.start(stepsAllowed)
+    fun stopSensors() = tracker.stop()
 
+    override fun onCleared() {
+        tracker.stop()
     }
 }
-

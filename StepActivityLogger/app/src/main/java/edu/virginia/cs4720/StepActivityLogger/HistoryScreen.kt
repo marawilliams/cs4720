@@ -30,8 +30,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HistoryScreen(modifier: Modifier = Modifier, vm: SensorViewModel = viewModel()){
-    val state by vm.uiState.collectAsState()
+fun HistoryScreen(modifier: Modifier = Modifier, vm: HistoryViewModel = viewModel()){
     val logs by vm.logs.collectAsState()
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -40,51 +39,26 @@ fun HistoryScreen(modifier: Modifier = Modifier, vm: SensorViewModel = viewModel
         contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 24.dp, start = 16.dp, end = 16.dp)
     ) {
         item {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
+           Text(
                         text = "Step History",
                         fontWeight = FontWeight.Bold,
                         fontSize = 32.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
-                }
-            }
         }
 
-        when {
-            state.isLoading -> item {
-                androidx.compose.foundation.layout.Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(modifier = Modifier.padding(16.dp))
-                }
-            }
-            state.error != null && logs.isEmpty() -> item {
-                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-                    Text(
-                        text = state.error ?: "Unable to connect",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(bottom = 12.dp)
-                    )
-                    Button(onClick = { vm.loadLogs() }, colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) { Text("Try Again") }
-                }
-            }
-            logs.isEmpty() -> item {
+        if (logs.isEmpty()) {
+            item{
                 Text(
-                    "Sorry! There are no logs yet!!",
+                    "No step history yet! Walk around and come back later!!",
                     modifier = Modifier.fillMaxWidth().padding(16.dp),
                     textAlign = TextAlign.Center
                 )
             }
-            else -> {
-                items(logs, key = { it.date }) { log -> LogCard(log) }
-            }
+        }
+        else{
+            items(logs, key = { it.date.toEpochDay()}) { log -> LogCard(log)}
         }
     }
 }
@@ -93,15 +67,16 @@ fun HistoryScreen(modifier: Modifier = Modifier, vm: SensorViewModel = viewModel
 @Composable
 fun LogCard(log: Log) {
     Card(modifier = Modifier.fillMaxWidth()) {
-        Row(Modifier.padding(16.dp)){
+        Row(Modifier.fillMaxWidth().padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween){
             Text(
                 text = log.dateLabel(),
-                fontSize = 14.sp,
-                modifier = Modifier.padding(top = 8.dp)
+                fontSize = 14.sp
             )
             Text (
-                text = "steps: ${log.stepCount}",
+                text = "${log.stepCount} steps",
                 fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 8.dp)
             )
         }

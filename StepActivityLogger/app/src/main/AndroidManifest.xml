@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,17 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeFootballScores">
         <activity
-            android:name=".HistoryActivity"
+            android:name=".SensorActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.CollegeFootballScores"
-            android:windowSoftInputMode="adjustResize">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:label="Step History" />
     </application>
 
 </manifest>
