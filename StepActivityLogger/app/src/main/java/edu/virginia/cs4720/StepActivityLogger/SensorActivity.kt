@@ -36,6 +36,12 @@ class SensorActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+            permissionLauncher.launch(Manifest.permission.ACTIVITY_RECOGNITION)
+        }
+
         setContent {
             SensoreScreenTheme {
                 Surface(
@@ -45,7 +51,7 @@ class SensorActivity : ComponentActivity() {
                     Scaffold { inner ->
                         SensorScreen(
                             modifier = Modifier.padding(inner),
-                            vm = viewModel,
+                               vm = viewModel,
                             onRequestPermission = {
                                 permissionLauncher.launch(Manifest.permission.ACTIVITY_RECOGNITION)
                             },

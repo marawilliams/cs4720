@@ -27,7 +27,10 @@ class HistoryActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Scaffold { innerPadding ->
-                        HistoryScreen(modifier = Modifier.padding(innerPadding))
+                        HistoryScreen(
+                            modifier = Modifier.padding(innerPadding),
+                            onBack = { finish() }
+                        )
                     }
                 }
             }

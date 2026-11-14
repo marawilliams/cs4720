@@ -61,9 +61,7 @@ fun SensorScreen(
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
                     Text(
-                        "Step counting is off. Activity recognition permission lets Android " +
-                                "share your step data with this app. Live accelerometer values still work. " +
-                                "You can also turn it on later in Settings."
+                        "We need activity recognition permission to count your steps. Step counting is unavailable, but live accelerometer values still work. You can turn it on later in Settings."
                     )
                     Row {
                         Button(onClick = onRequestPermission) { Text("Enable step counting") }

@@ -65,14 +65,13 @@ class StepCounter(context: Context) : SensorEventListener {
         lastSmoothed = 0f
         secondLastSmoothed = 0f
         val manualCounting = stepsAllowed && counter == null
-        val delay =
-            if (manualCounting) SensorManager.SENSOR_DELAY_GAME else SensorManager.SENSOR_DELAY_UI
+        val delay = 20_000
         accel?.let { sm.registerListener(this, it, delay) }
         if (stepsAllowed) counter?.let {
             sm.registerListener(
                 this,
                 it,
-                SensorManager.SENSOR_DELAY_NORMAL
+                20_000
             )
         }
     }

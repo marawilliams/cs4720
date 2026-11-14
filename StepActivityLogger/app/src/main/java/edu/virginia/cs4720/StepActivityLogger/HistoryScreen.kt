@@ -30,7 +30,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HistoryScreen(modifier: Modifier = Modifier, vm: HistoryViewModel = viewModel()){
+fun HistoryScreen(
+    modifier: Modifier = Modifier,
+    vm: HistoryViewModel = viewModel(),
+    onBack: () -> Unit = {}
+){
     val logs by vm.logs.collectAsState()
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -39,13 +43,22 @@ fun HistoryScreen(modifier: Modifier = Modifier, vm: HistoryViewModel = viewMode
         contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 24.dp, start = 16.dp, end = 16.dp)
     ) {
         item {
-           Text(
-                        text = "Step History",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 32.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(onClick = onBack) {
+                    Text("Back")
+                }
+            }
+            Text(
+                text = "Step History",
+                fontWeight = FontWeight.Bold,
+                fontSize = 32.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
 
         if (logs.isEmpty()) {
