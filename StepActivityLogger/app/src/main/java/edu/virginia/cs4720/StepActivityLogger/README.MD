@@ -36,11 +36,10 @@ https://www.analog.com/en/resources/app-notes/an-2554.html
 ethics paragraph:
 You can think about this question in its extremes.
 
-I think about many criminal investigations in which phone and sensor data were used to convict suspects of crime.
-For instance, by taking step counting data and possibly storing more information about it, if you were measuring the frequency and intensity of the acceleration,
-you could likely figure out how fast someone was walking, how much they were exerting, and for how long they were doing that activity.
+Criminal investigations have used sensor data to convict suspects of crimes, using location, activity, etc. to figure out
+there whereabouts.
 
-In a more common way, the data could reveal a user's routines, habits, and changes in health. If this data were to be sold
+In more general situations, the data could reveal a user's routines, habits, and changes in health. If this data were to be sold
 it could affect the targeted ads, suggestions by the phone, and even possibly health insurance.
 
 Besides raw accelerometer data, you could store walking pattern, or type of activities the user does, but it should really only store raw data to avoid that 
