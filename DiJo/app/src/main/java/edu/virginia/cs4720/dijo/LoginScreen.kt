@@ -125,7 +125,7 @@ fun LoginScreen(
         SmileyLogo()
         Spacer(Modifier.height(20.dp))
         Text(
-            text = "Welcome back",
+            text = "Welcome!",
             fontFamily = FontFamily.Serif,
             fontWeight = FontWeight.Bold,
             fontSize = 34.sp,
